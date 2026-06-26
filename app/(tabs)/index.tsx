@@ -12,17 +12,12 @@ export default function HomeScreen() {
       style={styles.imageContainer} 
       imageStyle={styles.image}>
         <View style={styles.titleContainer}>
-          <ThemedText 
-          style={styles.title} 
-          type="title">Одно из самых вкусных кофе в городе!</ThemedText>
+          <ThemedText style={styles.title} type="title">Одно из самых вкусных кофе в городе!</ThemedText>
         </View>
         <View style={styles.subcationContainer}>
-          <ThemedText 
-          style={styles.subcaption} 
-          type="subtitle">Свежие зёрна, настоящая арабика и бережная обжарка</ThemedText>
+          <ThemedText style={styles.subcaption} type="subtitle">Свежие зёрна, настоящая арабика и бережная обжарка</ThemedText>
         </View>
-        <Button
-          style={styles.button}  title="Начать"></Button>
+        <Button style={styles.button}  title="Начать"></Button>
       </ImageBackground>
     </View>
   );
