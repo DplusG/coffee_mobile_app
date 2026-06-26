@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     height: sizes.buttonHeight,
   },
   title: {
-    color: 'white',
+    color: colors.white,
     fontSize: sizes.buttonFontSize,
     fontWeight: sizes.buttonFontWeight,
   },

@@ -34,7 +34,12 @@ export default tseslint.config(
 			'react-native/split-platform-components': 2,
 			'react-native/no-inline-styles': 2,
 			'react-native/no-color-literals': 2,
-			'react-native/no-raw-text': 2,
+			'react-native/no-raw-text': [
+				2,
+				{
+					skip: ['ThemedText'],
+				},
+			],
 			'react-native/no-single-element-style-arrays': 2,
 			'react-hooks/exhaustive-deps': 'off',
 			'prettier/prettier': [
@@ -50,6 +55,7 @@ export default tseslint.config(
 				},
 			],
 			'@typescript-eslint/no-empty-function': 'off',
+			'@typescript-eslint/no-require-imports': 'off',
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off',
 		},

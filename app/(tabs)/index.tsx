@@ -30,7 +30,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: 'black',
+    backgroundColor: colors.black,
     flexGrow: 1,
   },
   imageContainer: {
