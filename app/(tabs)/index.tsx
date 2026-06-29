@@ -47,7 +47,9 @@ export default function HomeScreen() {
             Свежие зёрна, настоящая арабика и бережная обжарка
           </ThemedText>
         </View>
-        <Button style={styles.button} title="Начать"></Button>
+        <View style={styles.buttonContainer}>
+          <Button title="Начать"></Button>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     fontSize: sizes.textFontSize,
     paddingHorizontal: 30,
   },
-  button: {
+  buttonContainer: {
     paddingHorizontal: 30,
     paddingBottom: 43,
   },

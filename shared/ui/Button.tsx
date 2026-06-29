@@ -1,19 +1,49 @@
-import { Pressable, PressableProps, StyleSheet, Text, View } from 'react-native';
+import { useRef } from 'react';
+import {
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+  Animated,
+  GestureResponderEvent,
+} from 'react-native';
 import { colors, sizes } from './tokens';
 
-export function Button({ title, ...props }: PressableProps & { title: string }) {
+export function Button({ title, onPress, ...props }: PressableProps & { title: string }) {
+  const backgroundColor = useRef(new Animated.Value(0)).current;
+
+  const start = (event: GestureResponderEvent) => {
+    Animated.timing(backgroundColor, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start(() => {
+      Animated.timing(backgroundColor, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start(() => {
+        onPress?.(event);
+      });
+    });
+  };
+
+  const animationColor = backgroundColor.interpolate({
+    inputRange: [0, 1],
+    outputRange: [colors.primary, colors.primaryDark],
+  });
+
   return (
-    <Pressable {...props}>
-      <View style={styles.button}>
+    <Pressable {...props} onPress={start}>
+      <Animated.View style={[styles.button, { backgroundColor: animationColor }]}>
         <Text style={styles.title}>{title}</Text>
-      </View>
+      </Animated.View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: sizes.buttonBorderRadius,
