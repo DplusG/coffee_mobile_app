@@ -1,9 +1,27 @@
+import { useRef, useEffect } from 'react';
 import { ThemedText } from '@/components/themed-text';
 import { Button } from '@/shared/ui/Button';
 import { colors, sizes } from '@/shared/ui/tokens';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View, Animated } from 'react-native';
 
 export default function HomeScreen() {
+  const animationOpacity = useRef(new Animated.Value(0));
+  const animationPosition = useRef(new Animated.Value(0));
+
+  useEffect(() => {
+    Animated.timing(animationOpacity.current, {
+      toValue: 1,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(animationPosition.current, {
+      toValue: 60,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
+  }, [animationOpacity, animationPosition]);
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -13,9 +31,16 @@ export default function HomeScreen() {
         imageStyle={styles.image}
       >
         <View style={styles.titleContainer}>
-          <ThemedText style={styles.title} type="title">
-            Одно из самых вкусных кофе в городе!
-          </ThemedText>
+          <Animated.View
+            style={{
+              opacity: animationOpacity.current,
+              transform: [{ translateY: animationPosition.current }],
+            }}
+          >
+            <ThemedText style={styles.title} type="title">
+              Одно из самых вкусных кофе в городе!
+            </ThemedText>
+          </Animated.View>
         </View>
         <View style={styles.subcationContainer}>
           <ThemedText style={styles.subcaption} type="subtitle">
@@ -42,7 +67,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   titleContainer: {
-    marginBottom: 8,
+    marginBottom: 82,
   },
   title: {
     textAlign: 'center',
@@ -58,7 +83,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   button: {
-    padding: 30,
+    paddingHorizontal: 30,
     paddingBottom: 43,
   },
 });
