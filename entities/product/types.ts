@@ -1,5 +1,10 @@
 export interface Product {
   id: number;
-  title: string;
-  alias: string;
+  name: string;
+  subTitle: string;
+  type: string;
+  price: number;
+  image: string;
+  description: string;
+  ratine: number;
 }
