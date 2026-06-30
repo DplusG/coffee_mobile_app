@@ -1,42 +1,92 @@
-import { Button, StyleSheet, View } from 'react-native';
-
+import { useRef, useEffect } from 'react';
 import { ThemedText } from '@/components/themed-text';
+import { Button } from '@/shared/ui/Button';
+import { router } from 'expo-router';
+import { colors, sizes } from '@/shared/ui/tokens';
+import { ImageBackground, StyleSheet, View, Animated } from 'react-native';
 
 export default function HomeScreen() {
+  const animationOpacity = useRef(new Animated.Value(0));
+  const animationPosition = useRef(new Animated.Value(0));
+
+  useEffect(() => {
+    Animated.timing(animationOpacity.current, {
+      toValue: 1,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(animationPosition.current, {
+      toValue: 60,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
+  }, [animationOpacity, animationPosition]);
+
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.titleContainer}>
-        <ThemedText 
-        style={styles.title} 
-        type="title">Одно из самых вкусных кофе в городе!</ThemedText>
-      </View>
-      <View style={styles.subcationContainer}>
-        <ThemedText 
-        style={styles.subcaption} 
-        type="subtitle">Свежие зёрна, настоящая арабика и бережная обжарка</ThemedText>
-      </View>
-      <Button title="Начать"></Button>
+      <ImageBackground
+        source={require('@/assets/images/main-bg.png')}
+        resizeMode="contain"
+        style={styles.imageContainer}
+        imageStyle={styles.image}
+      >
+        <View style={styles.titleContainer}>
+          <Animated.View
+            style={{
+              opacity: animationOpacity.current,
+              transform: [{ translateY: animationPosition.current }],
+            }}
+          >
+            <ThemedText style={styles.title} type="title">
+              Одно из самых вкусных кофе в городе!
+            </ThemedText>
+          </Animated.View>
+        </View>
+        <View style={styles.subcationContainer}>
+          <ThemedText style={styles.subcaption} type="subtitle">
+            Свежие зёрна, настоящая арабика и бережная обжарка
+          </ThemedText>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button onPress={() => router.push('/catalog')} title="Начать"></Button>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
-    justifyContent: 'flex-end',
+    backgroundColor: colors.black,
     flexGrow: 1,
-    padding: 30,
-    paddingBottom: 43,
+  },
+  imageContainer: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+  },
+  image: {
+    top: 0,
+    alignSelf: 'center',
   },
   titleContainer: {
-    marginBottom: 82
+    marginBottom: 82,
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: colors.white,
   },
   subcationContainer: {
     marginBottom: 24,
   },
   subcaption: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: colors.gray,
+    fontSize: sizes.textFontSize,
+    paddingHorizontal: 30,
+  },
+  buttonContainer: {
+    paddingHorizontal: 30,
+    paddingBottom: 43,
   },
 });
