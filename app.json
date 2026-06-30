@@ -38,6 +38,15 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./shared/fonts/Inter-Regular.ttf",
+            "./shared/fonts/Inter-SemiBol.ttf"
+          ]
+        }
       ]
     ],
     "experiments": {

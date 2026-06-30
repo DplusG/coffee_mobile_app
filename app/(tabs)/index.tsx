@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { ThemedText } from '@/components/themed-text';
 import { Button } from '@/shared/ui/Button';
+import { router } from 'expo-router';
 import { colors, sizes } from '@/shared/ui/tokens';
 import { ImageBackground, StyleSheet, View, Animated } from 'react-native';
 
@@ -48,7 +49,7 @@ export default function HomeScreen() {
           </ThemedText>
         </View>
         <View style={styles.buttonContainer}>
-          <Button title="Начать"></Button>
+          <Button onPress={() => router.push('/catalog')} title="Начать"></Button>
         </View>
       </ImageBackground>
     </View>
