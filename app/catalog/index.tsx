@@ -1,5 +1,7 @@
 import { View, Text } from 'react-native';
 import { Link } from '@/shared/ui/Link';
+import { useAtom } from 'jotai';
+import { profileAtom } from '../../entities/user/model/user.model';
 
 interface Product {
   id: number;
@@ -8,6 +10,8 @@ interface Product {
 }
 
 export default function Catalog() {
+  const [profile] = useAtom(profileAtom);
+
   const products: Product[] = [
     {
       id: 44,
